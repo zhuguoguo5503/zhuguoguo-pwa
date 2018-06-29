@@ -1,19 +1,14 @@
 /**
  * @file appShell/appNav module
- * @author Tricker
+ * @author Tricker(tricker.pan@gmail.com)
  */
 
 export const SET_APP_NAV = 'SET_APP_NAV';
 
 export const state = () => {
     return {
-
-        /**
-         * 是否展示底部导航栏
-         *
-         * @type {boolean}
-         */
-        show: true
+        show: true,
+        nav: []
     }
 };
 

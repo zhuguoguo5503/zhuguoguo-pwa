@@ -14,6 +14,7 @@
                 </router-view>
             </keep-alive>
         </transition>
+        <app-nav></app-nav>
         <update-toast></update-toast>
     </div>
 </template>
@@ -22,6 +23,7 @@
 import Vue from 'vue';
 import {mapState, mapActions} from 'vuex';
 import UpdateToast from '@/components/UpdateToast';
+import AppNav from '@/components/AppNav';
 import {keepAlivePages} from '@/.lavas/router';
 
 const ENABLE_SCROLL_CLASS = 'app-view-scroll-enabled';
@@ -29,7 +31,8 @@ const ENABLE_SCROLL_CLASS = 'app-view-scroll-enabled';
 export default {
     name: 'app',
     components: {
-        UpdateToast
+        UpdateToast,
+        AppNav
     },
     computed: {
         ...mapState('pageTransition', {
@@ -39,6 +42,10 @@ export default {
 
         ...mapState('scrollBehavior', {
             scrollPostionMap: state => state.scrollPostionMap
+        }),
+
+        ...mapState('appShell/appNav', {
+            appNavShow: state => state.show
         }),
 
         pageTransitionClass() {

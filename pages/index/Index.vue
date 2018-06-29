@@ -128,7 +128,7 @@
 
         .index-container
             position relative
-            top 12vw
+            top 11vw
             width 100%
             height 100%
             overflow-x hidden

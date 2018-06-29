@@ -2,25 +2,25 @@
     <div>
         <router-view />
 
-        <div class="nav-wrapper">
-            <router-link to="/">
-                <icon name="home" scale="1.5"></icon>
-                主页
-            </router-link>
-            <router-link to="/nearby">
-                <icon name="map-marker" scale="1.5"></icon>
-                附近
-            </router-link>
-            <router-link to="orchard">果园</router-link>
-            <router-link to="/community">
-                <icon name="globe" scale="1.5"></icon>
-                动态
-            </router-link>
-            <router-link to="/user">
-                <icon name="user" scale="1.5"></icon>
-                我的
-            </router-link>
-        </div>
+        <!--<div class="nav-wrapper">-->
+            <!--<router-link to="/">-->
+                <!--<icon name="home" scale="1.5"></icon>-->
+                <!--主页-->
+            <!--</router-link>-->
+            <!--<router-link to="/nearby">-->
+                <!--<icon name="map-marker" scale="1.5"></icon>-->
+                <!--附近-->
+            <!--</router-link>-->
+            <!--<router-link to="orchard">果园</router-link>-->
+            <!--<router-link to="/community">-->
+                <!--<icon name="globe" scale="1.5"></icon>-->
+                <!--动态-->
+            <!--</router-link>-->
+            <!--<router-link to="/user">-->
+                <!--<icon name="user" scale="1.5"></icon>-->
+                <!--我的-->
+            <!--</router-link>-->
+        <!--</div>-->
     </div>
 </template>
 
@@ -28,9 +28,16 @@
     import {mapActions} from 'vuex';
 
     function setState(store) {
-        // store.dispatch('appShell/appNav/setAppNav', {
-        //     show: true
-        // });
+        store.dispatch('appShell/appNav/setAppNav', {
+            show: true,
+            nav: [
+                '主页',
+                '附近',
+                '果园',
+                '动态',
+                '我的'
+            ]
+        });
     }
 
     export default {
@@ -46,9 +53,9 @@
         async asyncData({store, route}) {
             setState(store);
         },
-        // activated() {
-        //     setState(this.$store);
-        // }
+        activated() {
+            setState(this.$store);
+        }
     };
 </script>
 
@@ -64,6 +71,7 @@
         height 13vw
         width 100%
         text-align center
+        background whitesmoke
         border-top 1px solid #e15517
         box-sizing border-box
 
