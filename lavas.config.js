@@ -65,7 +65,9 @@ module.exports = {
             'comment',
             'bullhorn',
             'star',
-            'star-half'
+            'star-half',
+            'tree',
+            'address-book'
         ]
     },
     serviceWorker: {
