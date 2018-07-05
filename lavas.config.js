@@ -67,7 +67,8 @@ module.exports = {
             'star',
             'star-half',
             'tree',
-            'address-book'
+            'list-alt',
+            'angle-right'
         ]
     },
     serviceWorker: {

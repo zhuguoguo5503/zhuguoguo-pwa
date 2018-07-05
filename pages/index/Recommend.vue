@@ -1,6 +1,8 @@
 <template>
     <div class="index-wrapper">
-        <router-view />
+        <div class="index-container">
+            <div class="goods-box" v-for=""></div>
+        </div>
     </div>
 </template>
 
@@ -15,26 +17,17 @@
             showComment: false,
             showLocation: false,
             showLocationSearch: false,
-            showTitle: false,
-            title: '',
-            showCommunity: true,
-            communityTitle: [{
-                name: '关注',
-                link: '/'
-            },{
-                name: '附近',
-                link: '/'
-            },{
-                name: '热门',
-                link: '/'
-            }]
+            showTitle: true,
+            title: '猜你喜欢',
+            showCommunity: false,
+            communityTitle: []
         })
     }
 
     export default {
-        name: "index",
+        name: "recommend",
         metaInfo: {
-            title: '动态',
+            title: '猜你喜欢',
             titleTemplate: '助果果 - %s',
             meta: [
                 {name: 'keywords', content: 'lavas PWA'},
@@ -55,29 +48,14 @@
     .index-wrapper
         width 100%
         height 100%
-        overflow: hidden;
+        overflow hidden
 
-        .index-header
-            position fixed
-            top 0
-            display flex
-            flex-direction row
-            justify-content center
-            align-items center
+        .index-container
+            position relative
+            top 11vw
             width 100%
-            height 11vw
-            color whitesmoke
-            background #e15517
-
-            > div
-                height 6vw
-                font-size 16px
-                line-height 6vw
-                margin-left 1vw
-                margin-right 1vw
-
-            .active
-                font-weight bold
-                border-bottom 2px solid whitesmoke
+            height 100%
+            overflow-x hidden
+            overflow-y scroll
 
 </style>

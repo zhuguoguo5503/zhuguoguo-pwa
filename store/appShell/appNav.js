@@ -18,8 +18,8 @@ export const state = () => {
             link: '/nearBy'
         },{
             ico: 'tree',
-            name: '果园',
-            link: '/orchard'
+            name: '猜你喜欢',
+            link: '/recommend'
         },{
             ico: 'globe',
             name: '动态',

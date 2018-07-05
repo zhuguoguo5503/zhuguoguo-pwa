@@ -1,21 +1,5 @@
 <template>
     <div class="index-wrapper">
-        <header class="index-header">
-            <div class="index-header-icon">
-                <icon name="qrcode" scale="2"/>
-            </div>
-            <div class="index-search-group">
-                <form>
-                    <input class="index-search-input" type="text" title="search" required>
-                    <button class="index-search-btn" type="submit">
-                        <icon name="search"></icon>
-                    </button>
-                </form>
-            </div>
-            <div class="index-header-icon">
-                <icon name="comment" scale="2"/>
-            </div>
-        </header>
         <div class="index-container">
             <div class="index-carousel-wrapper">
                 <div class="index-carousel-msg">
@@ -26,16 +10,6 @@
                 </div>
                 <div class="index-carousel-container"></div>
                 <div class="index-carousel-blank"></div>
-                <div class="index-nav-wrapper">
-                    <div class="index-nav-logo"></div>
-                    <div class="index-nav-sub index-nav-1st"></div>
-                    <div class="index-nav-sub index-nav-2nd"></div>
-                    <div class="index-nav-sub index-nav-3rd"></div>
-                    <div class="index-nav-sub index-nav-4th"></div>
-                    <div class="index-nav-sub index-nav-5th"></div>
-                    <div class="index-nav-sub index-nav-6th"></div>
-                    <div class="index-nav-sub index-nav-7th"></div>
-                </div>
             </div>
             <div class="index-sale-wrapper">
                 <div class="index-sale-box"></div>
@@ -52,7 +26,21 @@
 </template>
 
 <script>
+
     function setState(store) {
+        store.dispatch('appShell/appHeader/setAppHeader', {
+            show: true,
+            showBack: false,
+            showSearch: true,
+            showQrcode: true,
+            showComment: true,
+            showLocation: false,
+            showLocationSearch: false,
+            showTitle: false,
+            title: '',
+            showCommunity: false,
+            communityTitle: []
+        });
     }
 
     export default {
@@ -68,6 +56,9 @@
         async asyncData({store, route}) {
             setState(store);
         },
+        activated() {
+            setState(this.$store);
+        }
     }
 </script>
 
@@ -77,54 +68,6 @@
         width 100%
         height 100%
         overflow: hidden;
-
-        //<header>
-        .index-header
-            position fixed
-            top 0
-            display flex
-            flex-direction row
-            justify-content space-around
-            align-items center
-            width 100%
-            height 11vw
-            background #e15517
-
-            .index-header-icon
-                color whitesmoke
-
-            .index-search-group
-                position relative
-                width 70vw
-                height 7vw
-
-                .index-search-input
-                    position absolute
-                    top: 0
-                    left 0
-                    width 61vw
-                    height 7vw
-                    padding 0
-                    padding-left 5vw
-                    background whitesmoke
-                    border 1px solid black
-                    border-right none
-                    border-radius 4vw 0 0 4vw
-                    box-sizing border-box
-
-                .index-search-btn
-                    position absolute
-                    top: 0
-                    left 61vw
-                    width 9vw
-                    height 7vw
-                    padding 0
-                    background whitesmoke
-                    border 1px solid black
-                    border-left none
-                    border-radius 0 4vw 4vw 0
-                    box-sizing border-box
-        //</header>
 
         .index-container
             position relative

@@ -1,26 +1,6 @@
 <template>
     <div class="index-wrapper">
-        <header class="index-header">
-            <div class="index-header-icon">
-                <icon name="map-marker" scale="1.5"></icon>
-                <span>白山</span>
-            </div>
-            <div class="index-search-group">
-                <form>
-                    <input class="index-search-input" type="text" title="search" placeholder="找附近的吃喝玩乐" required>
-                    <button class="index-search-btn" type="submit">
-                        <icon name="search"></icon>
-                    </button>
-                </form>
-            </div>
-        </header>
-        <div class="index-catalog-wrapper">
-            <div class="index-catalog active">享美食</div>
-            <div class="index-catalog">惠生活</div>
-            <div class="index-catalog">爱玩乐</div>
-            <div class="index-catalog">住酒店</div>
-            <div class="index-catalog">全部</div>
-        </div>
+        <catalog></catalog>
         <div class="index-container">
             <div class="index-catalog-sub-wrapper">
                 <div class="index-catalog-sub active">热门</div>
@@ -165,7 +145,34 @@
 </template>
 
 <script>
-    function setState(store) {}
+
+    import Catalog from '@/components/nearBy/Catalog';
+
+    function setState(store) {
+        store.dispatch('appShell/nearBy/catalog/setCatalog', {
+            nav: [
+                '享美食',
+                '惠生活',
+                '爱玩乐',
+                '住酒店',
+                '全部'
+            ]
+        });
+        store.dispatch('appShell/appHeader/setAppHeader', {
+            show: true,
+            showBack: false,
+            showSearch: false,
+            showQrcode: false,
+            showComment: false,
+            showLocation: true,
+            showLocationSearch: true,
+            showTitle: false,
+            title: '',
+            showCommunity: false,
+            communityTitle: []
+        })
+    }
+
     export default {
         name: "index",
         metaInfo: {
@@ -176,9 +183,15 @@
                 {name: 'description', content: '基于 Vue 的 PWA 解决方案，帮助开发者快速搭建 PWA 应用，解决接入 PWA 的各种问题'}
             ]
         },
+        components: {
+            Catalog
+        },
         async asyncData({store, route}) {
             setState(store);
         },
+        activated() {
+            setState(this.$store);
+        }
     }
 </script>
 
@@ -188,77 +201,6 @@
         width 100%
         height 100%
         overflow hidden
-
-        .index-header
-            position fixed
-            top 0
-            display flex
-            flex-direction row
-            justify-content left
-            align-items center
-            width 100%
-            height 11vw
-            background #e15517
-
-            .index-header-icon
-                width 22vw
-                color whitesmoke
-
-                span
-                    font-size 20px
-
-            .index-search-group
-                position relative
-                width 70vw
-                height 7vw
-
-                .index-search-input
-                    position absolute
-                    top: 0
-                    left 0
-                    width 61vw
-                    height 7vw
-                    padding 0
-                    padding-left 5vw
-                    background whitesmoke
-                    border 1px solid black
-                    border-right none
-                    border-radius 4vw 0 0 4vw
-                    box-sizing border-box
-
-                .index-search-btn
-                    position absolute
-                    top: 0
-                    left 61vw
-                    width 9vw
-                    height 7vw
-                    padding 0
-                    background whitesmoke
-                    border 1px solid black
-                    border-left none
-                    border-radius 0 4vw 4vw 0
-                    box-sizing border-box
-
-        .index-catalog-wrapper
-            position fixed
-            top 11vw
-            display flex
-            flex-direction row
-            justify-content space-around
-            align-items flex-end
-            width 100%
-            height 7vw
-            border-bottom 1px solid black
-            box-sizing border-box
-
-            .index-catalog
-                height 6vw
-                line-height 6vw
-
-            .active
-                font-weight bold
-                border-bottom 2px solid #e15517
-                box-sizing border-box
 
         .index-container
             position relative

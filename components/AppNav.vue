@@ -3,9 +3,10 @@
         <div class="nav-wrapper">
             <div v-for="(item, index) in nav" :key="index">
                 <div v-if="index === 2">
-                    <div class="nav-icon" v-show="orchardDiv" @click="openNav()">
-                        <icon :name="item.ico" scale="1.5"></icon>
-                        {{item.name}}
+                    <div class="nav-icon" @click="openNav()">
+                        <router-link :to="item.link">
+                            <icon :name="item.ico" scale="1.8"></icon>
+                        </router-link>
                     </div>
                 </div>
                 <div v-else @click="switchNav(index)">
@@ -17,13 +18,13 @@
             </div>
         </div>
         <transition name="slide-up">
-            <div id="nav-shadow" class="nav-shadow" v-show="subNav" @click="closeNav()">
-                <router-link class="nav-link" to="/orchard" v-show="orchardLink">
-                    <icon name="tree" scale="5.5"></icon>
-                </router-link>
-                <div class="nav-sub-wrapper">
-                    <div class="nav-sub"></div>
+            <div class="nav-sub-wrapper" v-show="subNav">
+                <div class="nav-link">
+                    <router-link to="/orchard">
+                        <icon name="tree" scale="5"></icon>
+                    </router-link>
                 </div>
+                <div class="nav-sub"></div>
             </div>
         </transition>
     </div>
@@ -37,8 +38,6 @@
         data() {
             return {
                 active: 0,
-                orchardDiv: true,
-                orchardLink: false,
                 subNav: false,
             }
         },
@@ -50,19 +49,14 @@
         },
         methods: {
             switchNav: function (index) {
-                console.log(index);
-                if (index !== 2) {
+                if (index !== 2 && index !== this.active) {
                     this.active = index;
+                    console.log(index);
                 }
             },
             openNav: function () {
-                this.orchardLink = true;
-                this.subNav = true;
+                this.subNav = !this.subNav;
             },
-            closeNav: function () {
-                this.orchardLink = false;
-                this.subNav = false;
-            }
         }
     }
 </script>
@@ -70,17 +64,15 @@
 <style lang="stylus" scoped>
 
     .slide-up-enter-active
-        transition all 1s ease
+        transition all .8s ease
 
     .slide-up-leave-active
-        transition all 1s cubic-bezier(1.0, 0.5, 0.5, 1.0)
+        transition all .8s cubic-bezier(1.0, 0.5, 0.5, 1.0)
 
     .slide-up-enter
     .slide-up-leave-to
         transform translateY(20vw)
         opacity 0
-
-
 
     .nav-box
         position fixed
@@ -140,25 +132,21 @@
             box-sizing border-box
             z-index 555
 
-    .nav-shadow
+    .nav-sub-wrapper
         position fixed
-        top 0
-        right 0
-        bottom 0
-        left 0
-        width 100%
-        height 100%
-        background transparent
-        z-index 333
+        bottom -6vw
+        left 20vw
+        width 60vw
+        height 60vw
+        background aqua
+        border 1px solid black
+        border-radius 50%
+        box-sizing border-box
 
         .nav-link
-            position fixed
-            bottom 8vw
-            left 35vw
-            display flex
-            flex-direction column
-            justify-content center
-            align-items center
+            position relative
+            top 15vw
+            left 15vw
             width 30vw
             height 30vw
             color #e15517
@@ -168,15 +156,5 @@
             border-radius 50%
             box-sizing border-box
             z-index 444
-
-        .nav-sub-wrapper
-            position fixed
-            bottom -6vw
-            left 20vw
-            width 60vw
-            height 60vw
-            border 1px solid black
-            border-radius 50%
-            box-sizing border-box
 
 </style>

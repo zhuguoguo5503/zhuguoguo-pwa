@@ -1,5 +1,6 @@
 <template>
     <div id="app">
+        <app-header></app-header>
         <transition
             :name="pageTransitionEffect"
             @before-enter="handleBeforeEnter"
@@ -21,6 +22,7 @@
 <script>
 import Vue from 'vue';
 import {mapState, mapActions} from 'vuex';
+import AppHeader from '@/components/AppHeader';
 import UpdateToast from '@/components/UpdateToast';
 import {keepAlivePages} from '@/.lavas/router';
 
@@ -29,12 +31,17 @@ const ENABLE_SCROLL_CLASS = 'app-view-scroll-enabled';
 export default {
     name: 'app',
     components: {
+        AppHeader,
         UpdateToast,
     },
     computed: {
         ...mapState('pageTransition', {
             pageTransitionType: state => state.type,
             pageTransitionEffect: state => state.effect
+        }),
+
+        ...mapState('appShell/appHeader', {
+            appHeaderShow: state => state.show
         }),
 
         ...mapState('scrollBehavior', {

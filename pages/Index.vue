@@ -6,7 +6,7 @@
 </template>
 
 <script>
-    import {mapActions} from 'vuex';
+
     import AppNav from '@/components/AppNav'
 
     function setState(store) {
@@ -22,8 +22,8 @@
                 link: '/nearBy'
             },{
                 ico: 'tree',
-                name: '果园',
-                link: '/orchard'
+                name: '猜你喜欢',
+                link: '/recommend'
             },{
                 ico: 'globe',
                 name: '动态',
